@@ -22,15 +22,15 @@
 
 
     <!-- Header Start -->
-    <div class="container-fluid bg-primary d-flex align-items-center mb-5 py-5" id="home" style="min-height: 100vh;">
+    <div class="container-fluid bg-primary d-flex align-items-center mb-5 py-5" id="home" style="min-height: 100vh; ">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-5 px-5 pl-lg-0 pb-5 pb-lg-0">
                     <img class="img-fluid w-100 rounded-circle shadow-sm" src="{{ asset("storage/$user?->profile_pic") }}" alt="">
                 </div>
                 <div class="col-lg-7 text-center text-lg-left">
-                    <h3 class="text-white font-weight-normal mb-3">I'm</h3>
-                    <h1 class="display-3 text-uppercase text-primary mb-2" style="-webkit-text-stroke: 2px #ffffff;">{{ $user?->name }}</h1>
+                    <h3 class="text-white font-weight-normal mb-3">Hello! I AM</h3>
+                    <h1 class="display-3 text-uppercase text-primary mb-2" style="-webkit-text-stroke: 2px #ffffff; color :transparent !important;">{{ $user?->name }}</h1>
                     <h1 class="typed-text-output d-inline font-weight-lighter text-white"></h1>
                     <div class="typed-text d-none">{{ $user?->job }}</div>
                     <div class="d-flex align-items-center justify-content-center justify-content-lg-start pt-5">
@@ -64,7 +64,7 @@
                     <p>{{ $setting->about_description }}</p>
                     <div class="row mb-3">
                         <div class="col-sm-6 py-2"><h6>Name: <span class="text-secondary">{{ $user?->name }}</span></h6></div>
-                        <div class="col-sm-6 py-2"><h6>Birthday: <span class="text-secondary">{{ $user?->birth_day }}</span></h6></div>
+                        <div class="col-sm-6 py-2"><h6>Date Of Birth : <span class="text-secondary">{{ $user?->birth_day }}</span></h6></div>
                         <div class="col-sm-6 py-2"><h6>Degree: <span class="text-secondary">{{ $user?->degree }}</span></h6></div>
                         <div class="col-sm-6 py-2"><h6>Experience: <span class="text-secondary">{{ $user?->experience }} Years</span></h6></div>
                         <div class="col-sm-6 py-2"><h6>Phone: <span class="text-secondary">{{ $user?->phone }}</span></h6></div>
@@ -129,22 +129,27 @@
                 <h1 class="position-absolute text-uppercase text-primary">My Skills</h1>
             </div>
             <div class="row align-items-center">
-                @foreach($skills->split($skills->count()/3) as $row)
-                <div class="col-md-6">
-                    @foreach($row as $skill)
-                    <div class="skill mb-4">
-                        <div class="d-flex justify-content-between">
-                            <h6 class="font-weight-bold">{{ $skill->name }}</h6>
-                            <h6 class="font-weight-bold">{{$skill->percent}}%</h6>
+                @if($skills->count() > 0) <!-- Ensure skills collection is not empty -->
+                    @foreach($skills->chunk(ceil($skills->count() / 3)) as $row) <!-- Use chunk instead of split -->
+                        <div class="col-md-4"> <!-- Use col-md-4 for 3 columns layout -->
+                            @foreach($row as $skill)
+                                <div class="skill mb-4">
+                                    <div class="d-flex justify-content-between">
+                                        <h6 class="font-weight-bold">{{ $skill->name }}</h6>
+                                        <h6 class="font-weight-bold">{{$skill->percent}}%</h6>
+                                    </div>
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" aria-valuenow="{{$skill->percent}}" aria-valuemin="0" aria-valuemax="100" style="background-color: {{$skill->color}}"></div>
+                                    </div>
+                                </div>
+                            @endforeach
                         </div>
-                        <div class="progress">
-                            <div class="progress-bar" role="progressbar" aria-valuenow="{{$skill->percent}}" aria-valuemin="0" aria-valuemax="100" style="background-color: {{$skill->color}}"></div>
-                        </div>
-                    </div>
                     @endforeach
-                </div>
-                @endforeach
+                @else
+                    <p>No skills available.</p> <!-- Message in case there are no skills -->
+                @endif
             </div>
+            
         </div>
     </div>
     <!-- Skill End -->

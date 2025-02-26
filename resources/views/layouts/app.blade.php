@@ -26,13 +26,29 @@
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="{{ asset('import/assets/css/style.css') }}" rel="stylesheet">
+
+    <style>
+        .bg-primary {
+          background-image: url("{{ asset('assets/images/home.jpg') }}");
+          box-shadow: 0px 0px 0px 4000px rgba(4, 4, 4, 0.5) inset;
+        }
+
+        
+      </style>
+      
 </head>
 
 <body data-spy="scroll" data-target=".navbar" data-offset="51">
     <!-- Navbar Start -->
     <nav class="navbar fixed-top shadow-sm navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-lg-5">
         <a href="index.html" class="navbar-brand ml-lg-3">
-            <h1 class="m-0 display-5"><span class="text-primary">Free</span>Folio</h1>
+            <h1 class="m-0 display-5">
+                <span class="text-primary">
+                    <img src="{{ asset('assets/images/favicon.png') }}" alt="Icon" style="width: 50px; height: auto; border-radius: 50px;">
+                </span>
+            </h1>
+            
+            
         </a>
         <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>

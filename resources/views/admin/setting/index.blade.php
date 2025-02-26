@@ -31,7 +31,7 @@
             </div>
             <div class="form-group">
               <label for="exampleTextarea1">Description</label>
-              <textarea class="form-control" id="exampleTextarea1" rows="4" maxlength="255" name="about_description" required>{{ $setting->about_description }}</textarea>
+              <textarea class="form-control" id="exampleTextarea1" rows="4" maxlength="10000" name="about_description" required>{{ $setting->about_description }}</textarea>
             </div>
             <div class="form-group">
               <label>File upload</label>
